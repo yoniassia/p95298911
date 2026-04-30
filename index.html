@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eToro × Gindi Holdings — Crypto Real Estate Cyprus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00C853;
+            --primary-dark: #009624;
+            --accent: #6C63FF;
+            --dark: #0A0E1A;
+            --dark-card: #111827;
+            --dark-card-border: #1F2937;
+            --text: #F3F4F6;
+            --text-muted: #9CA3AF;
+            --gold: #F59E0B;
+            --cyan: #06B6D4;
+            --etoro-green: #00C853;
+            --gindi-blue: #1E40AF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            direction: ltr;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-animation .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+        .bg-animation .orb:nth-child(1) { width: 600px; height: 600px; background: var(--etoro-green); top: -200px; left: -100px; }
+        .bg-animation .orb:nth-child(2) { width: 500px; height: 500px; background: var(--gindi-blue); bottom: -150px; right: -100px; animation-delay: -7s; }
+        .bg-animation .orb:nth-child(3) { width: 400px; height: 400px; background: var(--accent); top: 50%; left: 50%; animation-delay: -14s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 14, 26, 0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+        nav .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .nav-logos .brand {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .nav-logos .brand .etoro { color: var(--etoro-green); }
+        .nav-logos .brand .x { color: var(--text-muted); margin: 0 6px; font-weight: 300; }
+        .nav-logos .brand .gindi { color: var(--gindi-blue); }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--text); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .lang-toggle {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 6px 12px;
+            color: var(--text);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-toggle:hover { background: rgba(255,255,255,0.15); }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+        .hero-content {
+            text-align: center;
+            width: 100%;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,200,83,0.1);
+            border: 1px solid rgba(0,200,83,0.2);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--etoro-green);
+            margin-bottom: 32px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--etoro-green), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--etoro-green), var(--primary-dark));
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 36px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,200,83,0.3); }
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 16px 36px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 80px;
+            padding: 40px;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-card-border);
+            border-radius: 20px;
+        }
+        .stat-item { text-align: center; }
+        .stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--etoro-green);
+            letter-spacing: -1px;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Sections */
+        section { padding: 100px 0; }
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+        .section-desc {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 640px;
+            line-height: 1.6;
+        }
+
+        /* How It Works */
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+        .flow-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-card-border);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .flow-card:hover { transform: translateY(-4px); border-color: var(--etoro-green); }
+        .flow-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .flow-card:nth-child(1) .flow-number { background: rgba(0,200,83,0.15); color: var(--etoro-green); }
+        .flow-card:nth-child(2) .flow-number { background: rgba(108,99,255,0.15); color: var(--accent); }
+        .flow-card:nth-child(3) .flow-number { background: rgba(6,182,212,0.15); color: var(--cyan); }
+        .flow-card:nth-child(4) .flow-number { background: rgba(245,158,11,0.15); color: var(--gold); }
+        .flow-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+        .flow-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+        .flow-arrow {
+            position: absolute;
+            right: -18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 20px;
+            opacity: 0.3;
+        }
+
+        /* Partners */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+        .partner-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-card-border);
+            border-radius: 16px;
+            padding: 36px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .partner-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+        .partner-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+        }
+        .partner-card:nth-child(1) .partner-icon { background: rgba(0,200,83,0.12); color: var(--etoro-green); }
+        .partner-card:nth-child(2) .partner-icon { background: rgba(30,64,175,0.2); color: #60A5FA; }
+        .partner-card:nth-child(3) .partner-icon { background: rgba(245,158,11,0.12); color: var(--gold); }
+        .partner-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .partner-card .role { font-size: 14px; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
+        .partner-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+        .benefit-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-card-border);
+            border-radius: 16px;
+            padding: 28px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            transition: transform 0.3s;
+        }
+        .benefit-card:hover { transform: translateY(-2px); }
+        .benefit-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(0,200,83,0.1);
+            color: var(--etoro-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .benefit-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+        .benefit-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+        /* Diagram */
+        .diagram-section {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-card-border);
+            border-radius: 24px;
+            padding: 60px 40px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        .flow-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .flow-node {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px 32px;
+            text-align: center;
+            min-width: 160px;
+        }
+        .flow-node i { font-size: 28px; margin-bottom: 12px; display: block; }
+        .flow-node .label { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .flow-node .sub { font-size: 12px; color: var(--text-muted); }
+        .flow-node.buyer i { color: var(--gold); }
+        .flow-node.etoro-node i { color: var(--etoro-green); }
+        .flow-node.bank-node i { color: var(--cyan); }
+        .flow-node.gindi-node i { color: var(--accent); }
+        .flow-connector {
+            font-size: 24px;
+            color: var(--etoro-green);
+            opacity: 0.5;
+        }
+        .flow-connector-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            padding: 120px 0;
+        }
+        .cta-section h2 {
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+        .cta-section p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--dark-card-border);
+            padding: 40px 0;
+            text-align: center;
+        }
+        footer p {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+        footer .logos {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        footer .logos span:first-child { color: var(--etoro-green); }
+        footer .logos span:nth-child(2) { color: var(--text-muted); }
+        footer .logos span:last-child { color: var(--gindi-blue); }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 24px; gap: 16px; }
+            .partners-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .flow-visual { flex-direction: column; }
+            .flow-connector { transform: rotate(90deg); }
+            .flow-node { width: 100%; }
+        }
+
+        /* Scroll reveal */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+<div class="bg-animation">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+</div>
+
+<!-- Nav -->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-logos">
+            <div class="brand">
+                <span class="etoro">eToro</span><span class="x">×</span><span class="gindi">Gindi</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#how">How It Works</a>
+            <a href="#partners">Partners</a>
+            <a href="#benefits">Benefits</a>
+            <a href="#contact">Contact</a>
+            <button class="lang-toggle" onclick="toggleLang()">🇮🇱 עברית</button>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-building"></i>
+                <span data-en="Gindi Holdings × eToro — Cyprus Real Estate Financing" data-he="גינדי החזקות × איטורו — מימון נדל&quot;ן בקפריסין">Gindi Holdings × eToro — Cyprus Real Estate Financing</span>
+            </div>
+            <h1>
+                <span data-en="Buy Property in Cyprus" data-he="קנה דירה בקפריסין">Buy Property in Cyprus</span><br>
+                <span class="gradient" data-en="Pay with Crypto." data-he="שלם בקריפטו.">Pay with Crypto.</span>
+            </h1>
+            <p data-en="A seamless partnership between eToro, Gindi Holdings, and Eurobank Cyprus. Convert your crypto to EUR and close on your dream home — fully compliant, fully digital." data-he="שיתוף פעולה חלק בין איטורו, גינדי החזקות ויורו בנק קפריסין. המרת הקריפטו שלך ליורו וסגירת העסקה על דירת חלומותיך — מוסדר לחלוטין, דיגיטלי לחלוטין.">
+                A seamless partnership between eToro, Gindi Holdings, and Eurobank Cyprus. Convert your crypto to EUR and close on your dream home — fully compliant, fully digital.
+            </p>
+            <div class="hero-cta">
+                <a href="#how" class="btn-primary"><i class="fas fa-play-circle"></i> <span data-en="How It Works" data-he="איך זה עובד">How It Works</span></a>
+                <a href="#contact" class="btn-outline"><i class="fas fa-envelope"></i> <span data-en="Get in Touch" data-he="צור קשר">Get in Touch</span></a>
+            </div>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value">40M+</div>
+                    <div class="stat-label" data-en="eToro Registered Users" data-he="משתמשים רשומים באיטורו">eToro Registered Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">30+</div>
+                    <div class="stat-label" data-en="Years — Gindi Holdings" data-he="שנות ניסיון — גינדי החזקות">Years — Gindi Holdings</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">€0</div>
+                    <div class="stat-label" data-en="Hidden Fees" data-he="עמלות נסתרות">Hidden Fees</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label" data-en="Regulated & Compliant" data-he="מוסדר ותואם רגולציה">Regulated & Compliant</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section id="how">
+    <div class="container">
+        <div class="section-label reveal"><i class="fas fa-cogs"></i> <span data-en="THE PROCESS" data-he="התהליך">THE PROCESS</span></div>
+        <h2 class="section-title reveal" data-en="From Crypto to Keys — in 4 Steps" data-he="מקריפטו למפתחות — ב-4 צעדים">From Crypto to Keys — in 4 Steps</h2>
+        <p class="section-desc reveal" data-en="A fully regulated pipeline that converts your crypto holdings into real estate ownership in Cyprus, through trusted financial institutions." data-he="צינור מוסדר לחלוטין שממיר את אחזקות הקריפטו שלך לבעלות על נדל&quot;ן בקפריסין, דרך מוסדות פיננסיים מהימנים.">
+            A fully regulated pipeline that converts your crypto holdings into real estate ownership in Cyprus, through trusted financial institutions.
+        </p>
+        <div class="flow-grid">
+            <div class="flow-card reveal">
+                <div class="flow-number">1</div>
+                <h3 data-en="Choose Your Property" data-he="בחר את הנכס שלך">Choose Your Property</h3>
+                <p data-en="Browse Gindi Holdings' premium Cyprus developments. Select your unit, review the terms, and lock in the price." data-he="עיין בפרויקטים של גינדי החזקות בקפריסין. בחר את היחידה, סקור את התנאים ונעל מחיר.">Browse Gindi Holdings' premium Cyprus developments. Select your unit, review the terms, and lock in the price.</p>
+                <span class="flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            </div>
+            <div class="flow-card reveal">
+                <div class="flow-number">2</div>
+                <h3 data-en="Pay with Crypto on eToro" data-he="שלם בקריפטו באיטורו">Pay with Crypto on eToro</h3>
+                <p data-en="Transfer crypto (BTC, ETH, USDT, etc.) to your eToro account. eToro handles the conversion to EUR at real-time market rates." data-he="העבר קריפטו (BTC, ETH, USDT ועוד) לחשבון האיטורו שלך. איטורו מבצע את ההמרה ליורו בשערי שוק בזמן אמת.">Transfer crypto (BTC, ETH, USDT, etc.) to your eToro account. eToro handles the conversion to EUR at real-time market rates.</p>
+                <span class="flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            </div>
+            <div class="flow-card reveal">
+                <div class="flow-number">3</div>
+                <h3 data-en="EUR to Eurobank Cyprus" data-he="יורו ליורו בנק קפריסין">EUR to Eurobank Cyprus</h3>
+                <p data-en="eToro wires the EUR directly to Eurobank Cyprus — the escrow/financing partner. Funds are held securely under Gindi's financing framework." data-he="איטורו מעביר את היורו ישירות ליורו בנק קפריסין — שותף הנאמנות/המימון. הכספים מוחזקים בביטחון תחת מסגרת המימון של גינדי.">eToro wires the EUR directly to Eurobank Cyprus — the escrow/financing partner. Funds are held securely under Gindi's financing framework.</p>
+                <span class="flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            </div>
+            <div class="flow-card reveal">
+                <div class="flow-number">4</div>
+                <h3 data-en="Receive Your Keys" data-he="קבל את המפתחות שלך">Receive Your Keys</h3>
+                <p data-en="Once payment clears and legal formalities complete, Gindi Holdings hands over the property. Welcome to your new home in Cyprus." data-he="לאחר שהתשלום מתבצע והפורמליות המשפטית הושלמה, גינדי החזקות מוסרים את הנכס. ברוכים הבאים לבית החדש שלך בקפריסין.">Once payment clears and legal formalities complete, Gindi Holdings hands over the property. Welcome to your new home in Cyprus.</p>
+            </div>
+        </div>
+
+        <!-- Visual Flow Diagram -->
+        <div class="diagram-section reveal">
+            <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 8px;" data-en="Payment Flow" data-he="תהליך התשלום">Payment Flow</h3>
+            <p style="color: var(--text-muted); font-size: 14px;" data-en="End-to-end regulated, fully transparent" data-he="מוסדר מקצה לקצה, שקוף לחלוטין">End-to-end regulated, fully transparent</p>
+            <div class="flow-visual">
+                <div class="flow-node buyer">
+                    <i class="fas fa-user"></i>
+                    <div class="label" data-en="Buyer" data-he="הקונה">Buyer</div>
+                    <div class="sub" data-en="Crypto (BTC/ETH/USDT)" data-he="קריפטו (BTC/ETH/USDT)">Crypto (BTC/ETH/USDT)</div>
+                </div>
+                <div class="flow-connector">
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="flow-connector-label" data-en="Sends Crypto" data-he="שולח קריפטו">Sends Crypto</span>
+                </div>
+                <div class="flow-node etoro-node">
+                    <i class="fas fa-exchange-alt"></i>
+                    <div class="label">eToro</div>
+                    <div class="sub" data-en="Crypto → EUR Conversion" data-he="המרת קריפטו ← יורו">Crypto → EUR Conversion</div>
+                </div>
+                <div class="flow-connector">
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="flow-connector-label" data-en="Wires EUR" data-he="מעביר יורו">Wires EUR</span>
+                </div>
+                <div class="flow-node bank-node">
+                    <i class="fas fa-landmark"></i>
+                    <div class="label" data-en="Eurobank Cyprus" data-he="יורו בנק קפריסין">Eurobank Cyprus</div>
+                    <div class="sub" data-en="Escrow & Financing" data-he="נאמנות ומימון">Escrow & Financing</div>
+                </div>
+                <div class="flow-connector">
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="flow-connector-label" data-en="Completes Sale" data-he="משלים עסקה">Completes Sale</span>
+                </div>
+                <div class="flow-node gindi-node">
+                    <i class="fas fa-building"></i>
+                    <div class="label" data-en="Gindi Holdings" data-he="גינדי החזקות">Gindi Holdings</div>
+                    <div class="sub" data-en="Property Delivery" data-he="מסירת הנכס">Property Delivery</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partners -->
+<section id="partners">
+    <div class="container">
+        <div class="section-label reveal"><i class="fas fa-handshake"></i> <span data-en="THE PARTNERS" data-he="השותפים">THE PARTNERS</span></div>
+        <h2 class="section-title reveal" data-en="Who's Behind This" data-he="מי עומד מאחורי זה">Who's Behind This</h2>
+        <p class="section-desc reveal" data-en="Three established institutions, one seamless experience." data-he="שלושה מוסדות מבוססים, חוויה אחת חלקה.">Three established institutions, one seamless experience.</p>
+        <div class="partners-grid">
+            <div class="partner-card reveal">
+                <div class="partner-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>eToro</h3>
+                <div class="role" data-en="Crypto-to-Fiat Conversion" data-he="המרת קריפטו לפיאט">Crypto-to-Fiat Conversion</div>
+                <p data-en="Global multi-asset platform with 40M+ users. NASDAQ-listed (ETOR). Licensed and regulated across multiple jurisdictions. Handles the crypto-to-EUR conversion at competitive market rates." data-he="פלטפורמת מולטי-אסט גלובלית עם 40M+ משתמשים. נסחרת בנאסד&quot;ק (ETOR). מורשית ומפוקחת במספר תחומי שיפוט. מבצעת את המרת הקריפטו ליורו בשערי שוק תחרותיים.">Global multi-asset platform with 40M+ users. NASDAQ-listed (ETOR). Licensed and regulated across multiple jurisdictions. Handles the crypto-to-EUR conversion at competitive market rates.</p>
+            </div>
+            <div class="partner-card reveal">
+                <div class="partner-icon"><i class="fas fa-building"></i></div>
+                <h3 data-en="Gindi Holdings" data-he="גינדי החזקות">Gindi Holdings</h3>
+                <div class="role" data-en="Real Estate Developer & Seller" data-he="יזם נדל&quot;ן ומוכר">Real Estate Developer & Seller</div>
+                <p data-en="One of Israel's largest real estate groups with 30+ years of experience. Developing premium residential projects in Cyprus as part of their international expansion. Trusted by thousands of buyers." data-he="אחת מקבוצות הנדל&quot;ן הגדולות בישראל עם 30+ שנות ניסיון. מפתחת פרויקטי מגורים פרימיום בקפריסין כחלק מההתרחבות הבינלאומית. נאמנה על ידי אלפי רוכשים.">One of Israel's largest real estate groups with 30+ years of experience. Developing premium residential projects in Cyprus as part of their international expansion. Trusted by thousands of buyers.</p>
+            </div>
+            <div class="partner-card reveal">
+                <div class="partner-icon"><i class="fas fa-landmark"></i></div>
+                <h3 data-en="Eurobank Cyprus" data-he="יורו בנק קפריסין">Eurobank Cyprus</h3>
+                <div class="role" data-en="Banking & Financing Partner" data-he="שותף בנקאי ומימוני">Banking & Financing Partner</div>
+                <p data-en="Major banking institution in Cyprus and Greece. Provides the escrow services and financing framework for the real estate transactions. Ensures funds are handled securely under full regulatory compliance." data-he="מוסד בנקאי מרכזי בקפריסין ויוון. מספק שירותי נאמנות ומסגרת מימון לעסקאות נדל&quot;ן. מבטיח שהכספים מנוהלים בביטחון תחת ציות רגולטורי מלא.">Major banking institution in Cyprus and Greece. Provides the escrow services and financing framework for the real estate transactions. Ensures funds are handled securely under full regulatory compliance.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits -->
+<section id="benefits">
+    <div class="container">
+        <div class="section-label reveal"><i class="fas fa-star"></i> <span data-en="WHY THIS WORKS" data-he="למה זה עובד">WHY THIS WORKS</span></div>
+        <h2 class="section-title reveal" data-en="Benefits for Buyers" data-he="יתרונות לרוכשים">Benefits for Buyers</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card reveal">
+                <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+                <div>
+                    <h4 data-en="Fully Regulated" data-he="מוסדר לחלוטין">Fully Regulated</h4>
+                    <p data-en="All transactions go through licensed financial institutions. Full AML/KYC compliance at every step." data-he="כל העסקאות עוברות דרך מוסדות פיננסיים מורשים. ציות מלא ל-AML/KYC בכל שלב.">All transactions go through licensed financial institutions. Full AML/KYC compliance at every step.</p>
+                </div>
+            </div>
+            <div class="benefit-card reveal">
+                <div class="benefit-icon"><i class="fas fa-bolt"></i></div>
+                <div>
+                    <h4 data-en="Fast Settlement" data-he="סגירה מהירה">Fast Settlement</h4>
+                    <p data-en="Crypto conversion and EUR wire happen within days, not weeks. No waiting for traditional banking delays." data-he="המרת קריפטו והעברת יורו מתבצעות תוך ימים, לא שבועות. ללא המתנה לעיכובי בנקאות מסורתית.">Crypto conversion and EUR wire happen within days, not weeks. No waiting for traditional banking delays.</p>
+                </div>
+            </div>
+            <div class="benefit-card reveal">
+                <div class="benefit-icon"><i class="fas fa-coins"></i></div>
+                <div>
+                    <h4 data-en="Multiple Cryptos Accepted" data-he="מגוון מטבעות קריפטו">Multiple Cryptos Accepted</h4>
+                    <p data-en="BTC, ETH, USDT, and 80+ other crypto assets supported on eToro. Pay with whatever you hold." data-he="BTC, ETH, USDT ו-80+ נכסי קריפטו נוספים נתמכים באיטורו. שלם עם מה שיש לך.">BTC, ETH, USDT, and 80+ other crypto assets supported on eToro. Pay with whatever you hold.</p>
+                </div>
+            </div>
+            <div class="benefit-card reveal">
+                <div class="benefit-icon"><i class="fas fa-home"></i></div>
+                <div>
+                    <h4 data-en="Premium Properties" data-he="נכסים פרימיום">Premium Properties</h4>
+                    <p data-en="Access Gindi Holdings' top-tier developments in Cyprus — prime locations, modern design, investment-grade assets." data-he="גישה לפרויקטי הפרימיום של גינדי החזקות בקפריסין — מיקומים מרכזיים, עיצוב מודרני, נכסים ברמת השקעה.">Access Gindi Holdings' top-tier developments in Cyprus — prime locations, modern design, investment-grade assets.</p>
+                </div>
+            </div>
+            <div class="benefit-card reveal">
+                <div class="benefit-icon"><i class="fas fa-percent"></i></div>
+                <div>
+                    <h4 data-en="Financing Options" data-he="אפשרויות מימון">Financing Options</h4>
+                    <p data-en="Through Eurobank Cyprus, buyers can access financing and mortgage options as part of the Gindi financing program." data-he="דרך יורו בנק קפריסין, רוכשים יכולים לקבל מימון ומשכנתאות כחלק מתוכנית המימון של גינדי.">Through Eurobank Cyprus, buyers can access financing and mortgage options as part of the Gindi financing program.</p>
+                </div>
+            </div>
+            <div class="benefit-card reveal">
+                <div class="benefit-icon"><i class="fas fa-globe-europe"></i></div>
+                <div>
+                    <h4 data-en="EU Jurisdiction" data-he="שיפוט אירופי">EU Jurisdiction</h4>
+                    <p data-en="Cyprus is an EU member state. Strong legal protections, property rights, and a favorable tax environment for international buyers." data-he="קפריסין היא מדינה חברה באיחוד האירופי. הגנות משפטיות חזקות, זכויות קניין וסביבת מס נוחה לרוכשים בינלאומיים.">Cyprus is an EU member state. Strong legal protections, property rights, and a favorable tax environment for international buyers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-section">
+    <div class="container">
+        <h2 class="reveal" data-en="Ready to Buy Property with Crypto?" data-he="מוכנים לקנות נכס בקריפטו?">Ready to Buy Property with Crypto?</h2>
+        <p class="reveal" data-en="Get in touch with our team to learn more about available properties and the purchase process." data-he="צור קשר עם הצוות שלנו כדי ללמוד עוד על הנכסים הזמינים ותהליך הרכישה.">Get in touch with our team to learn more about available properties and the purchase process.</p>
+        <div class="hero-cta reveal">
+            <a href="mailto:crypto-realestate@etoro.com" class="btn-primary"><i class="fas fa-envelope"></i> <span data-en="Contact Us" data-he="צור קשר">Contact Us</span></a>
+            <a href="#how" class="btn-outline"><i class="fas fa-info-circle"></i> <span data-en="Learn More" data-he="למד עוד">Learn More</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="logos">
+            <span>eToro</span>
+            <span>×</span>
+            <span data-en="Gindi Holdings" data-he="גינדי החזקות">Gindi Holdings</span>
+        </div>
+        <p data-en="This page is for informational purposes only and does not constitute financial advice or a binding offer. All transactions are subject to regulatory approval, KYC/AML verification, and the terms of each participating institution. eToro (Europe) Ltd. is licensed by CySEC (109/10). Crypto assets are unregulated in some jurisdictions. Property purchases are subject to the laws of the Republic of Cyprus." data-he="דף זה מיועד למטרות מידע בלבד ואינו מהווה ייעוץ פיננסי או הצעה מחייבת. כל העסקאות כפופות לאישור רגולטורי, אימות KYC/AML ותנאי כל מוסד משתתף. eToro (Europe) Ltd. מורשית על ידי CySEC (109/10). נכסי קריפטו אינם מוסדרים בחלק מתחומי השיפוט. רכישת נכסים כפופה לחוקי הרפובליקה של קפריסין.">
+            This page is for informational purposes only and does not constitute financial advice or a binding offer. All transactions are subject to regulatory approval, KYC/AML verification, and the terms of each participating institution. eToro (Europe) Ltd. is licensed by CySEC (109/10). Crypto assets are unregulated in some jurisdictions. Property purchases are subject to the laws of the Republic of Cyprus.
+        </p>
+        <p style="margin-top: 16px;">© 2026 eToro × Gindi Holdings. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Language toggle
+let lang = 'en';
+function toggleLang() {
+    lang = lang === 'en' ? 'he' : 'en';
+    document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang === 'he' ? 'he' : 'en';
+    document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+    });
+    document.querySelector('.lang-toggle').textContent = lang === 'he' ? '🇬🇧 English' : '🇮🇱 עברית';
+}
+</script>
+
+</body>
+</html>
